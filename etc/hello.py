@@ -4,4 +4,4 @@ def wsgi_application(environ, start_response):
     resp = environ['QUERY_STRING'].split("&")
     resp = environ['QUERY_STRING'].split("&")
     resp = [item+"\r\n" for item in resp]
-    return [resp]
+    return resp
