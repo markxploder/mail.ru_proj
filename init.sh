@@ -1,6 +1,7 @@
-sudo rm -r /etc/nginx/sites-enabled/default
-sudo ln -s /home/box/web/etc/nginx.conf  /etc/nginx/sites-enabled/default
-sudo /etc/init.d/nginx restart
-sudo ln -sf /home/box/web/etc/hello.py /etc/gunicorn.d/hello.py
-sudo gunicorn -b 0.0.0.0:8080 hello:app &
-sudo gunicorn -b 0.0.0.0:8000 /home/box/web/ask ask.wsgi:application & 
+#!/usr/bin/env bash
+
+ln -fs /home/box/web/etc/nginx.conf  /etc/nginx/sites-enabled/default
+/etc/init.d/nginx restart
+
+gunicorn -c /home/box/web/etc/hello.py hello:app --daemon
+gunicorn -c /home/box/web/etc/django.py wsgi --daemon
